@@ -22,25 +22,27 @@ const defaults = {
 
 export class OpenAI {
   token: string;
+  apiBase: string;
 
-  constructor(token: string) {
+  constructor(token: string, apiBase?: string) {
     if (!token) throw new Error('Missing OPENAI_API_KEY environment variable');
     this.token = token;
+    if (apiBase) this.apiBase = apiBase; else this.apiBase = 'https://api.openai.com';
   }
 
   createEmbeddings({ model, input }: { model: string; input: string }) {
-    return createEmbeddings({ model, input, token: this.token });
+    return createEmbeddings({ model, input, token: this.token, apiBase: this.apiBase });
   }
 
   chatCompletions(body: CreateChatCompletionRequest) {
-    return chatCompletions({ body: { ...defaults, ...body }, token: this.token });
+    return chatCompletions({ body: { ...defaults, ...body }, token: this.token, apiBase: this.apiBase });
   }
 
   completions(body: CreateCompletionRequest) {
-    return completions({ body: { ...defaults, ...body }, token: this.token });
+    return completions({ body: { ...defaults, ...body }, token: this.token, apiBase: this.apiBase });
   }
 
   listModels() {
-    return listModels({ token: this.token });
+    return listModels({ token: this.token, apiBase: this.apiBase });
   }
 }

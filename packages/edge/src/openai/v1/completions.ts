@@ -2,11 +2,12 @@ import type { CreateCompletionRequest } from 'openai';
 
 interface CompletionsOptions {
   token: string;
+  apiBase: string;
   body: CreateCompletionRequest;
 }
 
-export const completions = async ({ token, body }: CompletionsOptions) => {
-  const response = await fetch('https://api.openai.com/v1/completions', {
+export const completions = async ({ token, apiBase, body }: CompletionsOptions) => {
+  const response = await fetch(apiBase + '/v1/completions', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,

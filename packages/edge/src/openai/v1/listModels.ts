@@ -2,10 +2,11 @@ import type { ListModelsResponse } from 'openai';
 
 interface ListModelsOptions {
   token: string;
+  apiBase: string;
 }
 
-export const listModels = async ({ token }: ListModelsOptions): Promise<ListModelsResponse['data']> => {
-  const response = await fetch('https://api.openai.com/v1/models', {
+export const listModels = async ({ token,apiBase }: ListModelsOptions): Promise<ListModelsResponse['data']> => {
+  const response = await fetch(apiBase + '/v1/models', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`

@@ -3,7 +3,7 @@ import { OPENAI_COMPLETION_MODEL, OPENAI_EMBEDDING_MODEL } from '@7-docs/shared'
 import { getPrompt } from '@7-docs/shared';
 import { Pinecone } from '../client/pinecone.js';
 import { Supabase } from '../client/supabase.js';
-import { OPENAI_API_KEY } from '../env.js';
+import { OPENAI_API_BASE, OPENAI_API_KEY } from '../env.js';
 import { uniqueByProperty } from '../util/array.js';
 import ora from '../util/ora.js';
 import { writeToStdOut } from '../util/stream.js';
@@ -33,7 +33,7 @@ export const query = async ({ db, namespace, query, stream }: Options) => {
   const spinner = ora(`Creating vector embedding from query`).start();
 
   try {
-    const client = new OpenAI(OPENAI_API_KEY);
+    const client = new OpenAI(OPENAI_API_KEY, OPENAI_API_BASE);
     const response = await client.createEmbeddings({ input: query, model: OPENAI_EMBEDDING_MODEL });
 
     counters.usage = addTokens(counters.usage, [response.usage]);

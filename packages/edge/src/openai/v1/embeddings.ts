@@ -2,6 +2,7 @@ import type { CreateEmbeddingResponse, CreateEmbeddingResponseDataInner } from '
 
 interface EmbeddingsOptions {
   token: string;
+  apiBase: string;
   model: string;
   input: string;
 }
@@ -11,8 +12,8 @@ type EmbeddingResponse = {
   usage: CreateEmbeddingResponse['usage'];
 };
 
-export const createEmbeddings = async ({ token, model, input }: EmbeddingsOptions): Promise<EmbeddingResponse> => {
-  const response = await fetch('https://api.openai.com/v1/embeddings', {
+export const createEmbeddings = async ({ token,apiBase, model, input }: EmbeddingsOptions): Promise<EmbeddingResponse> => {
+  const response = await fetch(apiBase + '/v1/embeddings', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`

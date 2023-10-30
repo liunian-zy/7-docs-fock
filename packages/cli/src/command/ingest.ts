@@ -3,7 +3,7 @@ import { CHUNK_SIZE, OPENAI_EMBEDDING_MODEL } from '@7-docs/shared';
 import { Algolia } from '../client/algolia.js';
 import { Pinecone } from '../client/pinecone.js';
 import { Supabase } from '../client/supabase.js';
-import { OPENAI_API_KEY } from '../env.js';
+import { OPENAI_API_KEY, OPENAI_API_BASE } from '../env.js';
 import { fetchDocuments, sources } from '../fetcher/index.js';
 import { parseDocument } from '../parser/index.js';
 import { generateId } from '../util/crypto.js';
@@ -40,7 +40,7 @@ export const ingest = async (options: Options) => {
   if (!isValidTarget(db)) throw new Error(`Invalid --db: ${db}`);
   if (source === 'github' && !repo) throw new Error('No --repo provided');
 
-  const client = new OpenAI(OPENAI_API_KEY);
+  const client = new OpenAI(OPENAI_API_KEY, OPENAI_API_BASE);
 
   const spinner = ora(`Fetching files`).start();
 
