@@ -1,6 +1,7 @@
 import type { MetaData } from '@7-docs/shared';
 interface Options {
     OPENAI_API_KEY: string;
+    OPENAI_API_BASE: string;
     query: (vector: number[]) => Promise<MetaData[]>;
     system?: string;
     prompt?: string;

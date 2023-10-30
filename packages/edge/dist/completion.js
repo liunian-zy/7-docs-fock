@@ -4,10 +4,10 @@ import { isChatCompletionModel } from './openai/v1/util.js';
 import { TransformWithEvent } from './util/stream.js';
 import { getParams, pickFields, streamResponse } from './util.js';
 export const getCompletionHandler = (options) => {
-    const { OPENAI_API_KEY, system, query, prompt, fields = 'title,url,score' } = options;
+    const { OPENAI_API_KEY, OPENAI_API_BASE, system, query, prompt, fields = 'title,url,score' } = options;
     if (!OPENAI_API_KEY)
         throw new Error('OPENAI_API_KEY required');
-    const client = new OpenAI(OPENAI_API_KEY);
+    const client = new OpenAI(OPENAI_API_KEY, OPENAI_API_BASE);
     return async (req) => {
         const { query: input, previousQueries = [], previousResponses = [], embedding_model, completion_model, stream = true } = await getParams(req);
         if (!input)
