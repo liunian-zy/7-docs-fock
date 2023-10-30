@@ -15,7 +15,6 @@ export const completions = async ({ token, apiBase, body }: CompletionsOptions) 
     },
     body: JSON.stringify(body)
   });
-
   if (!response.ok) console.log(response);
 
   return response;

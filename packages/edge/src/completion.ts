@@ -84,6 +84,7 @@ export const getCompletionHandler = (options: Options) => {
       });
 
       const body = { model: completion_model, messages };
+      console.log(body);
       const completionResponse = await client.chatCompletions(body);
       if (!completionResponse.body) return new Response();
       if (!stream) return completionResponse;
@@ -91,6 +92,7 @@ export const getCompletionHandler = (options: Options) => {
       return streamResponse(transformedStream);
     } else {
       const body = { model: completion_model, prompt: finalPrompt };
+      console.log(body);
       const completionResponse = await client.completions(body);
       if (!completionResponse.body) return new Response();
       if (!stream) return completionResponse;

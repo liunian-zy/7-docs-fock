@@ -55,6 +55,7 @@ export const getCompletionHandler = (options) => {
                 content: finalPrompt
             });
             const body = { model: completion_model, messages };
+            console.log(body);
             const completionResponse = await client.chatCompletions(body);
             if (!completionResponse.body)
                 return new Response();
@@ -65,6 +66,7 @@ export const getCompletionHandler = (options) => {
         }
         else {
             const body = { model: completion_model, prompt: finalPrompt };
+            console.log(body);
             const completionResponse = await client.completions(body);
             if (!completionResponse.body)
                 return new Response();
