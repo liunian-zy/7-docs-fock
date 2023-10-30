@@ -8,6 +8,7 @@ import type { ChatCompletionRequestMessage } from 'openai';
 
 interface Options {
   OPENAI_API_KEY: string;
+  OPENAI_API_BASE: string;
   query: (vector: number[]) => Promise<MetaData[]>;
   system?: string;
   prompt?: string;
@@ -15,11 +16,11 @@ interface Options {
 }
 
 export const getCompletionHandler = (options: Options) => {
-  const { OPENAI_API_KEY, system, query, prompt, fields = 'title,url,score' } = options;
+  const { OPENAI_API_KEY,OPENAI_API_BASE, system, query, prompt, fields = 'title,url,score' } = options;
 
   if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY required');
 
-  const client = new OpenAI(OPENAI_API_KEY);
+  const client = new OpenAI(OPENAI_API_KEY,OPENAI_API_BASE);
 
   return async (req: Request): Promise<Response> => {
     const {
