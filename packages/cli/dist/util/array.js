@@ -1,0 +1,19 @@
+export const uniqueByProperty = (arr, property) => {
+    const uniqueValues = new Set();
+    return arr.filter(obj => {
+        if (uniqueValues.has(obj[property]))
+            return false;
+        uniqueValues.add(obj[property]);
+        return true;
+    });
+};
+export const forEachChunkedAsync = async (array, chunkSize, callbackFn) => {
+    const arrayLength = array.length;
+    let startIndex = 0;
+    while (startIndex < arrayLength) {
+        const endIndex = Math.min(startIndex + chunkSize, arrayLength);
+        const chunk = array.slice(startIndex, endIndex);
+        await callbackFn(chunk);
+        startIndex = endIndex;
+    }
+};

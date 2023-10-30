@@ -1,0 +1,10 @@
+export declare const OPENAI_API_KEY: string;
+export declare const OPENAI_API_BASE: string;
+export declare const PINECONE_URL: string;
+export declare const PINECONE_API_KEY: string;
+export declare const SUPABASE_URL: string;
+export declare const SUPABASE_API_KEY: string;
+export declare const GITHUB_TOKEN: string;
+export declare const ALGOLIA_APP_ID: string;
+export declare const ALGOLIA_API_KEY: string;
+export declare const ALGOLIA_INDEX_NAME: string;
